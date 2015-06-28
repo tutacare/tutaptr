@@ -14,6 +14,8 @@
 //Home
 Route::get('/', 'HomeController@index');
 Route::get('posts/{id}/show/{slug}', 'HomePostController@show');
+Route::post('posts/read-post', 'HomePostController@readPost');
+Route::get('mybook', 'HomePostController@myPost');
 //Route::resource('posts', 'HomePostController');
 
 // Authentication routes...

@@ -9,7 +9,7 @@
           <h1>{{ $post->post_title }}</h1>
           <p>{{ $post->post_description }}<p>
           <p>
-					{!! Form::open(array('url' => 'read-post')) !!}
+					{!! Form::open(array('url' => 'posts/read-post')) !!}
 
           <input type="hidden" name="post_id" value="{{ $post->id }}">
           <input type="hidden" name="post_price" value="{{ $post->post_price }}">

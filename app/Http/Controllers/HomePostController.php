@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\PostUser;
+use Auth, Input, Session, Redirect;
 
 class HomePostController extends Controller
 {
@@ -83,5 +85,21 @@ class HomePostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function readPost()
+    {
+      $posts = new PostUser;
+      $posts->user_id = Auth::user()->id;
+      $posts->post_id = Input::get('post_id');
+      $posts->save();
+      Session::flash('message', 'You have successfully pay for read');
+      return Redirect::to('/');
+    }
+
+    public function myPost()
+    {
+      $posts = PostUser::where('user_id', Auth::user()->id)->get();
+      return view('home.post.mybook', ['post' => $posts]);
     }
 }
