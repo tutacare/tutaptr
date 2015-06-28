@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\PostUser;
+use App\User;
 use Auth, Input, Session, Redirect;
 
 class HomePostController extends Controller
@@ -89,17 +90,34 @@ class HomePostController extends Controller
 
     public function readPost()
     {
+      if ($this->getBalance()->balance >= Input::get('post_price'))
+      {
       $posts = new PostUser;
       $posts->user_id = Auth::user()->id;
       $posts->post_id = Input::get('post_id');
       $posts->save();
       Session::flash('message', 'You have successfully pay for read');
-      return Redirect::to('/');
+      return Redirect::to('mybook');
+      }
+      else {
+        return Redirect::back()->with('message','Your balance not enought for read post !');
+      }
     }
 
     public function myPost()
     {
       $posts = PostUser::where('user_id', Auth::user()->id)->get();
       return view('home.post.mybook', ['post' => $posts]);
+    }
+
+    function getBalance()
+    {
+      $balances = User::find(Auth::user()->id)->first();
+      return $balances;
+    }
+
+    public function deposit()
+    {
+      return view('home.post.deposit', ['balance' => $this->getBalance()]);
     }
 }

@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 Route::get('posts/{id}/show/{slug}', 'HomePostController@show');
 Route::post('posts/read-post', 'HomePostController@readPost');
 Route::get('mybook', 'HomePostController@myPost');
+Route::get('deposit', 'HomePostController@deposit');
 //Route::resource('posts', 'HomePostController');
 
 // Authentication routes...
@@ -26,6 +27,6 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('dashboard', 'DashboardController@index');
 Route::resource('dashboard/posts', 'PostController');
 
-Route::get('deposit/pay-via-paypal', 'PaymentController@postPayment');
+Route::post('deposit/pay-via-paypal', 'PaymentController@postPayment');
 Route::get('deposit/payment-success', 'PaymentController@getSuccessPayment');
 Route::get('deposit/cancel-deposit', 'PaymentController@cancelOrderPayment');

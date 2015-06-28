@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Omnipay\Omnipay;
 use App\User;
-use Session, Auth;
+use Session, Auth, Input, Redirect;
 
 class PaymentController extends Controller
 {
@@ -18,9 +18,9 @@ class PaymentController extends Controller
     $params = array(
     'cancelUrl' 	=> url() . '/deposit/cancel-deposit',
     'returnUrl' 	=> url() . '/deposit/payment-success',
-    'name'		=> 'saya',
+    'name'		=> 'Deposit',
     'description' 	=> 'Deposit',
-    'amount' 	=> 0.50,
+    'amount' 	=> Input::get('amount'),
     'currency' 	=> 'USD'
     );
 
@@ -69,11 +69,13 @@ class PaymentController extends Controller
     } else {
     //Failed transaction
     }
-    echo 'sukses bro';
+    Session::flash('message', 'You have successfully deposit');
+    return Redirect::to('deposit');
   }
 
   public function cancelOrderPayment()
   {
-    echo 'Batal Deposit';
+    Session::flash('message', 'Deposit has been canceled');
+    return Redirect::to('deposit');
   }
 }

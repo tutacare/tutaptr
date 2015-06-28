@@ -1,10 +1,12 @@
 @extends('home.app')
 
 @section('content')
-
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+          @if (Session::has('message'))
+          	<div class="alert alert-info">{{ Session::get('message') }}</div>
+          @endif
           {!! Html::ul($errors->all()) !!}
           <h1>{{ $post->post_title }}</h1>
           <p>{{ $post->post_description }}<p>
