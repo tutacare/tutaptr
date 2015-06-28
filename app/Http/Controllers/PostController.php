@@ -44,6 +44,7 @@ class PostController extends Controller
         $posts->post_title = Input::get('post_title');
         $posts->post_description = Input::get('post_description');
         $posts->post_content = Input::get('post_content');
+        $posts->post_price = Input::get('post_price');
         $posts->save();
         Session::flash('message', 'You have successfully updated item');
         return Redirect::to('dashboard/posts/' . $posts->id . '/edit');

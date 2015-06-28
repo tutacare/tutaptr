@@ -18,6 +18,11 @@
 					</div>
 
 					<div class="form-group">
+					{!! Form::label('post_price', 'Price') !!}
+					{!! Form::text('post_price', Input::old('post_price'), array('class' => 'form-control')) !!}
+					</div>
+
+					<div class="form-group">
 					{!! Form::label('post_description', 'Description') !!}
 					{!! Form::textarea('post_description', Input::old('post_description'), array('rows' => '5', 'cols' => '80', 'class' => 'form-control')) !!}
 					</div>
@@ -27,14 +32,14 @@
 					{!! Form::textarea('post_content', Input::old('post_content'), array('rows' => '10', 'cols' => '80', 'id' => 'editor1', 'class' => 'form-control')) !!}
 					</div>
 
-					
+
 					{!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
 
 					{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
-	</div>           
+	</div>
 </div>
             <script>
                 CKEDITOR.replace( 'editor1' );

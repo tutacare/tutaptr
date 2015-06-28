@@ -21,7 +21,7 @@
             <td>{{ $value->post_title }}</td>
             <td>{{ $value->user_id }}</td>
             <td>
-                <a class="btn btn-small btn-info" href="{{ URL::to('items/' . $value->id . '/edit') }}">Edit</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('dashboard/posts/' . $value->id . '/edit') }}">Edit</a>
                 {!! Form::open(array('url' => 'items/' . $value->id, 'class' => 'pull-right')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}

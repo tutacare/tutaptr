@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('post_title', 255);
             $table->string('post_description', 255);
             $table->longText('post_content');
+            $table->decimal('post_price', 15, 2);
             $table->string('post_status', 20)->default('publish');
             $table->timestamps();
         });
