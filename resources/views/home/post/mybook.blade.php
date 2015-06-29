@@ -10,19 +10,16 @@
           <table class="table table-striped table-bordered">
               <thead>
                   <tr>
-                      <td>user_id</td>
-                      <td>post_id</td>
+                      <td>Post Title</td>
                       <td>&nbsp;</td>
                   </tr>
               </thead>
               <tbody>
               @foreach($post as $value)
                   <tr>
-                      <td>{{ $value->user_id }}</td>
-                      <td>{{ $value->post_id }}</td>
+                      <td><a href="{{ URL::to('posts/' . $value->id . '/show/' . str_slug($value->post->post_title) ) }}">{{ $value->post->post_title }}</a></td>
                       <td>
-                          <a class="btn btn-small btn-info" href="{{ URL::to('dashboard/posts/' . $value->id . '/edit') }}">Edit</a>
-                          {!! Form::open(array('url' => 'items/' . $value->id, 'class' => 'pull-right')) !!}
+                          {!! Form::open(array('url' => 'posts/' . $value->id)) !!}
                               {!! Form::hidden('_method', 'DELETE') !!}
                               {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
                           {!! Form::close() !!}

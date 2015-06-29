@@ -10,6 +10,9 @@
           {!! Html::ul($errors->all()) !!}
           <h1>{{ $post->post_title }}</h1>
           <p>{{ $post->post_description }}<p>
+          @if($stat == 1)
+          <p>{!! $post->post_content !!}
+          @else
           <p>
 					{!! Form::open(array('url' => 'posts/read-post')) !!}
 
@@ -18,6 +21,7 @@
           <button type="submit" class="btn btn-success">Pay ${{$post->post_price}} for Read</button>
 					{!! Form::close() !!}
           </p>
+          @endif
         </div>
         @include('home.sidebar')
     </div>

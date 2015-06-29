@@ -17,7 +17,8 @@ Route::get('posts/{id}/show/{slug}', 'HomePostController@show');
 Route::post('posts/read-post', 'HomePostController@readPost');
 Route::get('mybook', 'HomePostController@myPost');
 Route::get('deposit', 'HomePostController@deposit');
-//Route::resource('posts', 'HomePostController');
+//Route::post('dashboard/posts/destroy', );
+Route::resource('posts', 'HomePostController');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

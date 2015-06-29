@@ -13,6 +13,10 @@ use Auth, Input, Session, Redirect;
 
 class HomePostController extends Controller
 {
+  public function __construct()
+	{
+		$this->middleware('auth');
+	}
     /**
      * Display a listing of the resource.
      *
@@ -51,8 +55,13 @@ class HomePostController extends Controller
      */
     public function show($id)
     {
+      $status = 0;
+      if(PostUser::where('post_id', $id)->first())
+      {
+          $status = 1;
+      }
       $posts = Post::find($id);
-      return view('home.post.show', ['post' => $posts]);
+      return view('home.post.show', ['post' => $posts, 'stat' => $status]);
     }
 
     /**
@@ -85,13 +94,20 @@ class HomePostController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $postuser = PostUser::find($id);
+          $postuser->delete();
+          // redirect
+          Session::flash('message', 'You have successfully deleted post');
+          return Redirect::to('mybook');
     }
 
     public function readPost()
     {
       if ($this->getBalance()->balance >= Input::get('post_price'))
       {
+      $amounts = User::find(Auth::user()->id)->first();
+      $amounts->balance = $amounts->balance - Input::get('post_price');
+      $amounts->save();
       $posts = new PostUser;
       $posts->user_id = Auth::user()->id;
       $posts->post_id = Input::get('post_id');
