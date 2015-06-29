@@ -56,7 +56,7 @@ class HomePostController extends Controller
     public function show($id)
     {
       $status = 0;
-      if(PostUser::where('post_id', $id)->first())
+      if(PostUser::where('user_id', Auth::user()->id)->where('post_id', $id)->first())
       {
           $status = 1;
       }
