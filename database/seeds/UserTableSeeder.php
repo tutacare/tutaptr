@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@tuta.ptr',
             'password' => bcrypt('admin'),
+            'role' => 'Administrator',
         ]);
     }
 }
