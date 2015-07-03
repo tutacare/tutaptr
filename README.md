@@ -8,6 +8,7 @@ Installation
 <li>Change directory: cd tutaptr/</li>
 <li>Install Laravel: composer install --prefer-dist</li>
 <li>Change your database settings in config/database.php</li>
+<li>Change your paypal settings in app/Http/Controllers/PaymentController.php</li>
 <li>Migrate your database: php artisan migrate</li>
 <li>Seed your database: php artisan db:seed</li>
 <li>View your application in browser</li>
