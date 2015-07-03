@@ -13,6 +13,11 @@ use Session, Auth, Input, Redirect;
 class PaymentController extends Controller
 {
 
+  protected $paypal_username = 'your_paypal_username';
+  protected $paypal_password = 'your_paypal_password';
+  protected $paypal_signature = 'your_paypal_signature';
+  protected $paypal_testmode = true;
+
   public function postPayment()
   {
     $params = array(
@@ -28,10 +33,10 @@ class PaymentController extends Controller
     Session::save();
 
     $gateway = Omnipay::create('PayPal_Express');
-    $gateway->setUsername(env('PAYPAL_USERNAME'));
-    $gateway->setPassword(env('PAYPAL_PASSWORD'));
-    $gateway->setSignature(env('PAYPAL_SIGNATURE'));
-    $gateway->setTestMode(env('PAYPAL_TESTMODE'));
+    $gateway->setUsername(env('PAYPAL_USERNAME', $this->paypal_username));
+    $gateway->setPassword(env('PAYPAL_PASSWORD', $this->paypal_password));
+    $gateway->setSignature(env('PAYPAL_SIGNATURE', $this->paypal_signature));
+    $gateway->setTestMode(env('PAYPAL_TESTMODE', $this->paypal_testmode));
 
     $response = $gateway->purchase($params)->send();
 
@@ -49,10 +54,10 @@ class PaymentController extends Controller
   public function getSuccessPayment()
   {
     $gateway = Omnipay::create('PayPal_Express');
-    $gateway->setUsername(env('PAYPAL_USERNAME'));
-    $gateway->setPassword(env('PAYPAL_PASSWORD'));
-    $gateway->setSignature(env('PAYPAL_SIGNATURE'));
-    $gateway->setTestMode(env('PAYPAL_TESTMODE'));
+    $gateway->setUsername(env('PAYPAL_USERNAME', $this->paypal_username));
+    $gateway->setPassword(env('PAYPAL_PASSWORD', $this->paypal_password));
+    $gateway->setSignature(env('PAYPAL_SIGNATURE', $this->paypal_signature));
+    $gateway->setTestMode(env('PAYPAL_TESTMODE', $this->paypal_testmode));
 
     $params = Session::get('params');
 
